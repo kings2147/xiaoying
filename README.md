@@ -3,6 +3,21 @@
 按题号顺序实现四个独立业务 Agent，共用有步数上限的模型/工具运行循环。
 所有业务素材、制度、费用均为合成数据；仅保存本地草稿与方案。
 
+## 本次验证结果
+
+33 项自动化测试、22 个离线验收场景、12 个真实模型场景全部通过；排期和规划另有 2 份真实重复执行记录。
+38 份实际输出/Trace 可用 `py scripts/audit_evidence.py` 重放业务工具核对。
+`py scripts/check.py` 一次执行全量单元测试与证据重放，报告写入 `examples/validation.json` 和 `examples/tests.txt`。
+
+| 题号 | 已验证的关键行为 | 离线场景 | 真实模型场景 |
+|---|---|---:|---:|
+| 1 素材审核与排期 | 18:00 冲突改建议 19:00，保留待确认；仅保存一份草稿 | 5 | 3 + 重复保存 |
+| 2 内容任务规划 | 预算 10 时从报价 12 改选 8；故障保留成功结果；支持续跑 | 5 | 3 + 重复执行 |
+| 3 企业知识问答 | 30 天与 15 天冲突时引用双方并请求确认，读取失败不生成答案 | 6 | 3 |
+| 4 短视频脚本 | 真实模型将 48 秒初稿修订为 30 秒，并重做当前版本的两项检查 | 6 | 3 |
+
+[完整需求](docs/01-requirements.md) · [总方案](docs/02-solution.md) · [评估方法](docs/03-evaluation.md) · [AI 使用](docs/04-ai-usage.md) · [复盘](docs/05-retrospective.md) · [提交信息](docs/submission.md)
+
 ## 环境与运行
 
 Python 3.11+，运行和测试仅用标准库。PowerShell：
@@ -21,6 +36,10 @@ py -m xiaoying_agents media --input examples/media/conflict.input.json --provide
 - `--provider openai`：配置 `.env.example` 中的环境变量，调用兼容的 Chat Completions JSON 接口。
 
 真实模型与 Mock 的运行记录分别存放，不把离线记录作为真实决策证据。
+本机已在隔离虚拟环境验证 editable 安装及 `xiaoying` 命令。JSON 文件与标准输出使用 UTF-8。
+CLI 退出码：0 为完成或明确的业务待确认/缺资料状态，1 为 failed/incomplete，2 为输入或环境错误。
+默认 `.runtime/state.sqlite3` 保留幂等状态；独立试跑可指定 `--state :memory:`，持久化续跑使用相同数据库路径与业务输入。
+Codex CLI 为本次实际验证的真实模型入口；OpenAI 兼容 API 入口尚未做真实服务联调。
 
 ## 工程流程
 

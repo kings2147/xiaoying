@@ -2,7 +2,7 @@
   "provider": "codex",
   "real_model": true,
   "python": "3.11.15",
-  "executed_at_utc": "2026-11-01T06:17:51.496890+00:00",
+  "executed_at_utc": "2026-11-01T06:22:37.609240+00:00",
   "cases": [
     {
       "case": "normal",
@@ -10,7 +10,8 @@
       "actual": "completed",
       "termination": "model_finished",
       "steps": 5,
-      "passed": true
+      "passed": true,
+      "report_started_at_utc": "2026-11-01T06:17:51.496890+00:00"
     },
     {
       "case": "revise",
@@ -18,7 +19,8 @@
       "actual": "completed",
       "termination": "model_finished",
       "steps": 8,
-      "passed": true
+      "passed": true,
+      "report_started_at_utc": "2026-11-01T06:17:51.496890+00:00"
     },
     {
       "case": "tool_failure",
@@ -26,10 +28,11 @@
       "actual": "incomplete",
       "termination": "model_finished",
       "steps": 5,
+      "report_started_at_utc": "2026-11-01T06:22:37.609240+00:00",
       "passed": true
     }
   ],
   "passed": true,
-  "finished_at_utc": "2026-11-01T06:21:30.150473+00:00",
-  "elapsed_seconds": 218.703
+  "finished_at_utc": "2026-11-01T06:23:39.236519+00:00",
+  "elapsed_seconds": 61.687
 }

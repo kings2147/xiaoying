@@ -29,21 +29,26 @@ def main():
     parser.add_argument("--provider", choices=["mock", "codex", "openai"], default="mock")
     parser.add_argument("--cases", nargs="*")
     parser.add_argument("--tests", action="store_true")
+    parser.add_argument("--merge", action="store_true", help="Keep earlier case evidence when rerunning selected cases")
     args = parser.parse_args()
     started = time.monotonic()
     folder = ROOT / "examples" / args.task
     expectations = json.loads((folder / "expectations.json").read_text(encoding="utf-8"))
     cases = args.cases or list(expectations)
     model = make_model(args.provider)
+    report_path = folder / f"evaluation.{args.provider}.json"
+    previous = json.loads(report_path.read_text(encoding="utf-8")) if args.merge and report_path.exists() else {}
     report = {"provider": args.provider, "real_model": model.real, "python": platform.python_version(),
-              "executed_at_utc": datetime.now(timezone.utc).isoformat(), "cases": []}
+              "executed_at_utc": datetime.now(timezone.utc).isoformat(), "cases": previous.get("cases", [])}
+    for previous_case in report["cases"]:
+        previous_case.setdefault("report_started_at_utc", previous.get("executed_at_utc"))
     for case in cases:
         request = json.loads((folder / f"{case}.input.json").read_text(encoding="utf-8"))
         store = Store()
         output = run(get_task(args.task)(request, store), model)
         write(folder / f"{case}.{args.provider}.json", output)
         entry = {"case": case, "expected": expectations[case], "actual": output["result"]["status"],
-                 "termination": output["termination"], "steps": len(output["trace"])}
+                 "termination": output["termination"], "steps": len(output["trace"]), "report_started_at_utc": report["executed_at_utc"]}
         entry["passed"] = entry["actual"] == entry["expected"] and entry["termination"] == "model_finished"
         if args.task in {"media", "planning"} and case == "normal":
             repeated = run(get_task(args.task)(request, store), model)
@@ -51,7 +56,7 @@ def main():
             artifact = repeated["result"].get("draft") or repeated["result"].get("saved_plan")
             entry["duplicate_passed"] = bool(artifact and artifact["duplicate"])
             entry["passed"] &= entry["duplicate_passed"]
-        report["cases"].append(entry)
+        report["cases"] = [prior for prior in report["cases"] if prior["case"] != case] + [entry]
         store.close()
         print(json.dumps(entry, ensure_ascii=False), flush=True)
     if args.tests:
@@ -63,7 +68,7 @@ def main():
     report["passed"] = all(e["passed"] for e in report["cases"]) and report.get("tests", {}).get("passed", True)
     report["finished_at_utc"] = datetime.now(timezone.utc).isoformat()
     report["elapsed_seconds"] = round(time.monotonic() - started, 3)
-    write(folder / f"evaluation.{args.provider}.json", report)
+    write(report_path, report)
     return 0 if report["passed"] else 1
 
 

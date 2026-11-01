@@ -1,0 +1,197 @@
+{
+  "audited_at_utc": "2026-11-01T06:24:20.549787+00:00",
+  "method": "recorded actions replayed against current real business tools; no model called",
+  "files": [
+    {
+      "file": "examples/media/conflict.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/conflict.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/duplicate.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/duplicate.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/missing.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/normal.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/normal.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/risk.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/save_failure.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/media/save_failure.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/duplicate.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/duplicate.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/missing.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/normal.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/normal.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/overbudget.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/replan.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/replan.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/tool_failure.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/planning/tool_failure.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/conflict.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/conflict.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/followup.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/normal.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/normal.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/outside.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/paraphrase.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/tool_failure.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/knowledge/tool_failure.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/impossible.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/missing.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/no_material.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/normal.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/normal.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/revise.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/revise.mock.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/tool_failure.codex.json",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "file": "examples/script/tool_failure.mock.json",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "passed": true
+}
