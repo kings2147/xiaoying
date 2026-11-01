@@ -1,0 +1,16 @@
+test_concurrent_duplicates_are_atomic (tests.test_core.CoreTests.test_concurrent_duplicates_are_atomic) ... ok
+test_durable_idempotency_and_conflicting_payload (tests.test_core.CoreTests.test_durable_idempotency_and_conflicting_payload) ... ok
+test_infinite_model_hits_limit (tests.test_core.CoreTests.test_infinite_model_hits_limit) ... ok
+test_invalid_model_reply_and_redacted_failure (tests.test_core.CoreTests.test_invalid_model_reply_and_redacted_failure) ... ok
+test_budget_replanning_12_to_8 (tests.test_planning.PlanningTests.test_budget_replanning_12_to_8) ... ok
+test_duplicate_and_overbudget_guard (tests.test_planning.PlanningTests.test_duplicate_and_overbudget_guard) ... ok
+test_failure_preserves_success_and_resumes (tests.test_planning.PlanningTests.test_failure_preserves_success_and_resumes) ... ok
+test_missing_budget_and_deadline (tests.test_planning.PlanningTests.test_missing_budget_and_deadline) ... ok
+test_no_feasible_budget_or_deadline (tests.test_planning.PlanningTests.test_no_feasible_budget_or_deadline) ... ok
+test_nonfinite_or_boolean_budget (tests.test_planning.PlanningTests.test_nonfinite_or_boolean_budget) ... ok
+test_normal_cost_and_dependencies (tests.test_planning.PlanningTests.test_normal_cost_and_dependencies) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.190s
+
+OK

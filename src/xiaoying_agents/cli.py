@@ -12,12 +12,15 @@ def get_task(name):
     if name == "media":
         from .media import MediaTask
         return MediaTask
+    if name == "planning":
+        from .planning import PlanningTask
+        return PlanningTask
     raise ValueError(f"Unknown task: {name}")
 
 
 def main():
     parser = argparse.ArgumentParser(description="Run a bounded content agent; JSON input/output and factual Trace")
-    parser.add_argument("task", choices=["media"])
+    parser.add_argument("task", choices=["media", "planning"])
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--provider", choices=["mock", "codex", "openai"], default="mock")
     parser.add_argument("--state", default=".runtime/state.sqlite3")

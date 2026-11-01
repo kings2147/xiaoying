@@ -1,0 +1,289 @@
+{
+  "task": "planning",
+  "provider": "codex",
+  "real_model": true,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "plan-normal",
+    "topic": "字幕活动",
+    "budget": 15,
+    "start_at": "2026-11-02T09:00:00+08:00",
+    "deadline": "2026-11-02T12:00:00+08:00"
+  },
+  "result": {
+    "status": "completed",
+    "missing": [],
+    "incomplete_reason": null,
+    "assets": [
+      {
+        "id": "A01",
+        "title": "字幕活动素材",
+        "keywords": [
+          "字幕",
+          "视频",
+          "内容",
+          "subtitles"
+        ],
+        "fact": "支持字幕"
+      }
+    ],
+    "estimates": {
+      "premium": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 0,
+        "deadline_gap_minutes": 0,
+        "feasible": true
+      }
+    },
+    "successful_scripts": {
+      "premium": {
+        "package": "premium",
+        "text": "字幕活动：支持字幕",
+        "source_ids": [
+          "A01"
+        ]
+      }
+    },
+    "saved_plan": {
+      "ok": true,
+      "id": "plan-plan-normal",
+      "duplicate": false,
+      "payload": {
+        "topic": "字幕活动",
+        "budget": 15,
+        "deadline": "2026-11-02T12:00:00+08:00",
+        "estimate": {
+          "ok": true,
+          "package": "premium",
+          "cost_breakdown": {
+            "assets": 2,
+            "script": 4,
+            "production": 6
+          },
+          "total_cost": 12,
+          "minutes": 90,
+          "end_at": "2026-11-02T10:30:00+08:00",
+          "budget_gap": 0,
+          "deadline_gap_minutes": 0,
+          "feasible": true
+        },
+        "script": {
+          "package": "premium",
+          "text": "字幕活动：支持字幕",
+          "source_ids": [
+            "A01"
+          ]
+        },
+        "assets": [
+          {
+            "id": "A01",
+            "title": "字幕活动素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "fact": "支持字幕"
+          }
+        ],
+        "steps": [
+          {
+            "id": "assets",
+            "depends_on": [],
+            "status": "succeeded"
+          },
+          {
+            "id": "estimate",
+            "depends_on": [
+              "assets"
+            ],
+            "status": "succeeded"
+          },
+          {
+            "id": "script",
+            "depends_on": [
+              "estimate"
+            ],
+            "status": "succeeded"
+          }
+        ]
+      }
+    },
+    "total_cost": 12,
+    "resumed_from_checkpoint": false,
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_assets",
+        "arguments": {
+          "query": "字幕活动"
+        },
+        "reason": "Required request fields are present, and no retrieved assets are checkpointed."
+      },
+      "observation": {
+        "ok": true,
+        "assets": [
+          {
+            "id": "A01",
+            "title": "字幕活动素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "fact": "支持字幕"
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Required request fields and successful assets are present; premium must be estimated first, and no estimate is checkpointed."
+      },
+      "observation": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 0,
+        "deadline_gap_minutes": 0,
+        "feasible": true
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "generate_script",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Successful assets and a feasible premium estimate are checkpointed: cost 12 is within budget 15, and completion at 10:30 precedes the 12:00 deadline. No script is checkpointed."
+      },
+      "observation": {
+        "ok": true,
+        "script": {
+          "package": "premium",
+          "text": "字幕活动：支持字幕",
+          "source_ids": [
+            "A01"
+          ]
+        }
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "save_plan",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Premium has successful assets, a feasible estimate of 12 within budget 15 with completion before the deadline, and a generated script. The plan has not been saved."
+      },
+      "observation": {
+        "ok": true,
+        "id": "plan-plan-normal",
+        "duplicate": false,
+        "payload": {
+          "topic": "字幕活动",
+          "budget": 15,
+          "deadline": "2026-11-02T12:00:00+08:00",
+          "estimate": {
+            "ok": true,
+            "package": "premium",
+            "cost_breakdown": {
+              "assets": 2,
+              "script": 4,
+              "production": 6
+            },
+            "total_cost": 12,
+            "minutes": 90,
+            "end_at": "2026-11-02T10:30:00+08:00",
+            "budget_gap": 0,
+            "deadline_gap_minutes": 0,
+            "feasible": true
+          },
+          "script": {
+            "package": "premium",
+            "text": "字幕活动：支持字幕",
+            "source_ids": [
+              "A01"
+            ]
+          },
+          "assets": [
+            {
+              "id": "A01",
+              "title": "字幕活动素材",
+              "keywords": [
+                "字幕",
+                "视频",
+                "内容",
+                "subtitles"
+              ],
+              "fact": "支持字幕"
+            }
+          ],
+          "steps": [
+            {
+              "id": "assets",
+              "depends_on": [],
+              "status": "succeeded"
+            },
+            {
+              "id": "estimate",
+              "depends_on": [
+                "assets"
+              ],
+              "status": "succeeded"
+            },
+            {
+              "id": "script",
+              "depends_on": [
+                "estimate"
+              ],
+              "status": "succeeded"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "The premium plan was successfully saved as plan-plan-normal, with planned cost 12 within budget 15 and completion at 2026-11-02T10:30:00+08:00 before the deadline."
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

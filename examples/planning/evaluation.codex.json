@@ -1,0 +1,34 @@
+{
+  "provider": "codex",
+  "real_model": true,
+  "python": "3.11.15",
+  "executed_at_utc": "2026-11-01T06:10:13.882753+00:00",
+  "cases": [
+    {
+      "case": "normal",
+      "expected": "completed",
+      "actual": "completed",
+      "termination": "model_finished",
+      "steps": 5,
+      "passed": true,
+      "duplicate_passed": true
+    },
+    {
+      "case": "replan",
+      "expected": "completed",
+      "actual": "completed",
+      "termination": "model_finished",
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "case": "tool_failure",
+      "expected": "incomplete",
+      "actual": "incomplete",
+      "termination": "model_finished",
+      "steps": 5,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

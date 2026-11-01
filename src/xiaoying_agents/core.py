@@ -32,13 +32,12 @@ class Store:
     def save(self, kind: str, key: str, payload: dict) -> dict:
         serialized = canonical(payload)
         with self.db:
+            cursor = self.db.execute("INSERT OR IGNORE INTO artifacts VALUES (?,?,?)", (kind, key, serialized))
             row = self.db.execute("SELECT payload FROM artifacts WHERE kind=? AND key=?", (kind, key)).fetchone()
-            if row:
-                if row[0] != serialized:
-                    return {"ok": False, "error": "idempotency_conflict", "message": "Same request ID has different content"}
-                return {"ok": True, "id": f"{kind}-{key}", "duplicate": True, "payload": json.loads(row[0])}
-            self.db.execute("INSERT INTO artifacts VALUES (?,?,?)", (kind, key, serialized))
-        return {"ok": True, "id": f"{kind}-{key}", "duplicate": False, "payload": payload}
+            if row[0] != serialized:
+                return {"ok": False, "error": "idempotency_conflict", "message": "Same request ID has different content"}
+            duplicate = cursor.rowcount == 0
+        return {"ok": True, "id": f"{kind}-{key}", "duplicate": duplicate, "payload": json.loads(row[0])}
 
     def get(self, kind: str, key: str) -> dict | None:
         row = self.db.execute("SELECT payload FROM artifacts WHERE kind=? AND key=?", (kind, key)).fetchone()
@@ -46,6 +45,12 @@ class Store:
 
     def close(self):
         self.db.close()
+
+    def checkpoint(self, key: str, payload: dict):
+        """Mutable execution checkpoint, separate from immutable deliverable artifacts."""
+        with self.db:
+            self.db.execute("INSERT INTO artifacts VALUES ('checkpoint',?,?) ON CONFLICT(kind,key) DO UPDATE SET payload=excluded.payload",
+                            (key, canonical(payload)))
 
 
 @dataclass
@@ -95,7 +100,7 @@ class Task:
             if not isinstance(result, dict):
                 raise ValueError("tool returned a non-object")
             return result
-        except (ValueError, TypeError, KeyError, OSError) as exc:
+        except (ValueError, TypeError, KeyError, OSError, sqlite3.Error) as exc:
             result = {"ok": False, "error": type(exc).__name__, "message": str(exc)[:300]}
             self.errors.append({"tool": name, **result})
             return result

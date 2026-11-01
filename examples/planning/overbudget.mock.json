@@ -1,0 +1,200 @@
+{
+  "task": "planning",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "plan-overbudget",
+    "topic": "字幕活动",
+    "budget": 3,
+    "start_at": "2026-11-02T09:00:00+08:00",
+    "deadline": "2026-11-02T12:00:00+08:00"
+  },
+  "result": {
+    "status": "incomplete",
+    "missing": [],
+    "incomplete_reason": "no_feasible_plan",
+    "assets": [
+      {
+        "id": "A01",
+        "title": "字幕活动素材",
+        "keywords": [
+          "字幕",
+          "视频",
+          "内容",
+          "subtitles"
+        ],
+        "fact": "支持字幕"
+      }
+    ],
+    "estimates": {
+      "premium": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 9,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      },
+      "lean": {
+        "ok": true,
+        "package": "lean",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 2,
+          "production": 4
+        },
+        "total_cost": 8,
+        "minutes": 45,
+        "end_at": "2026-11-02T09:45:00+08:00",
+        "budget_gap": 5,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      },
+      "basic": {
+        "ok": true,
+        "package": "basic",
+        "cost_breakdown": {
+          "assets": 1,
+          "script": 1,
+          "production": 3
+        },
+        "total_cost": 5,
+        "minutes": 30,
+        "end_at": "2026-11-02T09:30:00+08:00",
+        "budget_gap": 2,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      }
+    },
+    "successful_scripts": {},
+    "saved_plan": null,
+    "total_cost": null,
+    "resumed_from_checkpoint": false,
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_assets",
+        "arguments": {
+          "query": "字幕活动"
+        },
+        "reason": "Retrieve campaign assets"
+      },
+      "observation": {
+        "ok": true,
+        "assets": [
+          {
+            "id": "A01",
+            "title": "字幕活动素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "fact": "支持字幕"
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Evaluate quality/cost/deadline"
+      },
+      "observation": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 9,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "lean"
+        },
+        "reason": "Evaluate quality/cost/deadline"
+      },
+      "observation": {
+        "ok": true,
+        "package": "lean",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 2,
+          "production": 4
+        },
+        "total_cost": 8,
+        "minutes": 45,
+        "end_at": "2026-11-02T09:45:00+08:00",
+        "budget_gap": 5,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "basic"
+        },
+        "reason": "Evaluate quality/cost/deadline"
+      },
+      "observation": {
+        "ok": true,
+        "package": "basic",
+        "cost_breakdown": {
+          "assets": 1,
+          "script": 1,
+          "production": 3
+        },
+        "total_cost": 5,
+        "minutes": 30,
+        "end_at": "2026-11-02T09:30:00+08:00",
+        "budget_gap": 2,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "No feasible package remains; report actual gap"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

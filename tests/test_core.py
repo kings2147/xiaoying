@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from xiaoying_agents.core import Store, Task, action, run
@@ -11,6 +12,22 @@ class FakeTask(Task):
 
 
 class CoreTests(unittest.TestCase):
+    def test_concurrent_duplicates_are_atomic(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = str(Path(directory) / "db.sqlite3")
+            Store(path).close()
+            def save(_):
+                store = Store(path)
+                try:
+                    return store.save("draft", "same-id", {"a": 1})
+                finally:
+                    store.close()
+            with ThreadPoolExecutor(max_workers=8) as executor:
+                results = list(executor.map(save, range(8)))
+            self.assertTrue(all(r["ok"] for r in results))
+            self.assertEqual(sum(not r["duplicate"] for r in results), 1)
+            self.assertEqual(len({r["id"] for r in results}), 1)
+
     def test_durable_idempotency_and_conflicting_payload(self):
         with tempfile.TemporaryDirectory() as directory:
             path = str(Path(directory) / "db.sqlite3")

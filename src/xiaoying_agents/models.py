@@ -48,6 +48,7 @@ class CodexModel:
             output = Path(directory) / "decision.json"
             # Isolated empty CWD, read-only sandbox, ephemeral session. Never read/copy auth files.
             command = [self.binary, "exec", "--ephemeral", "--sandbox", "read-only", "--skip-git-repo-check",
+                       "--config", "features.shell_tool=false", "--config", "model_reasoning_effort=\"low\"",
                        "--color", "never", "--output-last-message", str(output), "-"]
             if os.environ.get("CODEX_MODEL"):
                 command[2:2] = ["--model", os.environ["CODEX_MODEL"]]

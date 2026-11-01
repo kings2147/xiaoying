@@ -1,0 +1,217 @@
+{
+  "task": "planning",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "plan-normal",
+    "topic": "字幕活动",
+    "budget": 15,
+    "start_at": "2026-11-02T09:00:00+08:00",
+    "deadline": "2026-11-02T12:00:00+08:00"
+  },
+  "result": {
+    "status": "completed",
+    "missing": [],
+    "incomplete_reason": null,
+    "assets": [
+      {
+        "fact": "支持字幕",
+        "id": "A01",
+        "keywords": [
+          "字幕",
+          "视频",
+          "内容",
+          "subtitles"
+        ],
+        "title": "字幕活动素材"
+      }
+    ],
+    "estimates": {
+      "premium": {
+        "budget_gap": 0,
+        "cost_breakdown": {
+          "assets": 2,
+          "production": 6,
+          "script": 4
+        },
+        "deadline_gap_minutes": 0,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "feasible": true,
+        "minutes": 90,
+        "ok": true,
+        "package": "premium",
+        "total_cost": 12
+      }
+    },
+    "successful_scripts": {
+      "premium": {
+        "package": "premium",
+        "source_ids": [
+          "A01"
+        ],
+        "text": "字幕活动：支持字幕"
+      }
+    },
+    "saved_plan": {
+      "ok": true,
+      "id": "plan-plan-normal",
+      "duplicate": true,
+      "payload": {
+        "assets": [
+          {
+            "fact": "支持字幕",
+            "id": "A01",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "title": "字幕活动素材"
+          }
+        ],
+        "budget": 15,
+        "deadline": "2026-11-02T12:00:00+08:00",
+        "estimate": {
+          "budget_gap": 0,
+          "cost_breakdown": {
+            "assets": 2,
+            "production": 6,
+            "script": 4
+          },
+          "deadline_gap_minutes": 0,
+          "end_at": "2026-11-02T10:30:00+08:00",
+          "feasible": true,
+          "minutes": 90,
+          "ok": true,
+          "package": "premium",
+          "total_cost": 12
+        },
+        "script": {
+          "package": "premium",
+          "source_ids": [
+            "A01"
+          ],
+          "text": "字幕活动：支持字幕"
+        },
+        "steps": [
+          {
+            "depends_on": [],
+            "id": "assets",
+            "status": "succeeded"
+          },
+          {
+            "depends_on": [
+              "assets"
+            ],
+            "id": "estimate",
+            "status": "succeeded"
+          },
+          {
+            "depends_on": [
+              "estimate"
+            ],
+            "id": "script",
+            "status": "succeeded"
+          }
+        ],
+        "topic": "字幕活动"
+      }
+    },
+    "total_cost": 12,
+    "resumed_from_checkpoint": true,
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "save_plan",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Preserve successful results and save"
+      },
+      "observation": {
+        "ok": true,
+        "id": "plan-plan-normal",
+        "duplicate": true,
+        "payload": {
+          "assets": [
+            {
+              "fact": "支持字幕",
+              "id": "A01",
+              "keywords": [
+                "字幕",
+                "视频",
+                "内容",
+                "subtitles"
+              ],
+              "title": "字幕活动素材"
+            }
+          ],
+          "budget": 15,
+          "deadline": "2026-11-02T12:00:00+08:00",
+          "estimate": {
+            "budget_gap": 0,
+            "cost_breakdown": {
+              "assets": 2,
+              "production": 6,
+              "script": 4
+            },
+            "deadline_gap_minutes": 0,
+            "end_at": "2026-11-02T10:30:00+08:00",
+            "feasible": true,
+            "minutes": 90,
+            "ok": true,
+            "package": "premium",
+            "total_cost": 12
+          },
+          "script": {
+            "package": "premium",
+            "source_ids": [
+              "A01"
+            ],
+            "text": "字幕活动：支持字幕"
+          },
+          "steps": [
+            {
+              "depends_on": [],
+              "id": "assets",
+              "status": "succeeded"
+            },
+            {
+              "depends_on": [
+                "assets"
+              ],
+              "id": "estimate",
+              "status": "succeeded"
+            },
+            {
+              "depends_on": [
+                "estimate"
+              ],
+              "id": "script",
+              "status": "succeeded"
+            }
+          ],
+          "topic": "字幕活动"
+        }
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Clarification needed or saved successfully"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

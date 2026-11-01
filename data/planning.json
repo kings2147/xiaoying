@@ -1,0 +1,8 @@
+{
+  "assets": [{"id":"A01","title":"字幕活动素材","keywords":["字幕","视频","内容","subtitles"],"fact":"支持字幕"}],
+  "packages": {
+    "premium":{"costs":{"assets":2,"script":4,"production":6},"minutes":90},
+    "lean":{"costs":{"assets":2,"script":2,"production":4},"minutes":45},
+    "basic":{"costs":{"assets":1,"script":1,"production":3},"minutes":30}
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "task": "planning",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "plan-missing",
+    "topic": "字幕活动",
+    "start_at": "2026-11-02T09:00:00+08:00",
+    "deadline": "2026-11-02T12:00:00+08:00"
+  },
+  "result": {
+    "status": "needs_information",
+    "missing": [
+      "budget",
+      "valid_budget"
+    ],
+    "incomplete_reason": null,
+    "assets": [],
+    "estimates": {},
+    "successful_scripts": {},
+    "saved_plan": null,
+    "total_cost": null,
+    "resumed_from_checkpoint": false,
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Clarification needed or saved successfully"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

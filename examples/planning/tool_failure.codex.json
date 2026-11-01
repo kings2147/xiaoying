@@ -1,0 +1,166 @@
+{
+  "task": "planning",
+  "provider": "codex",
+  "real_model": true,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "plan-failure",
+    "topic": "字幕活动",
+    "budget": 15,
+    "start_at": "2026-11-02T09:00:00+08:00",
+    "deadline": "2026-11-02T12:00:00+08:00",
+    "simulate_failures": {
+      "generate_script": -1
+    }
+  },
+  "result": {
+    "status": "incomplete",
+    "missing": [],
+    "incomplete_reason": "tool_failure",
+    "assets": [
+      {
+        "id": "A01",
+        "title": "字幕活动素材",
+        "keywords": [
+          "字幕",
+          "视频",
+          "内容",
+          "subtitles"
+        ],
+        "fact": "支持字幕"
+      }
+    ],
+    "estimates": {
+      "premium": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 0,
+        "deadline_gap_minutes": 0,
+        "feasible": true
+      }
+    },
+    "successful_scripts": {},
+    "saved_plan": null,
+    "total_cost": null,
+    "resumed_from_checkpoint": false,
+    "errors": [
+      {
+        "tool": "generate_script",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic generate_script failure"
+      },
+      {
+        "tool": "generate_script",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic generate_script failure"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_assets",
+        "arguments": {
+          "query": "字幕活动"
+        },
+        "reason": "Required request fields are present, and no retrieved assets are checkpointed."
+      },
+      "observation": {
+        "ok": true,
+        "assets": [
+          {
+            "id": "A01",
+            "title": "字幕活动素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "fact": "支持字幕"
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Required inputs and retrieved assets are present; premium must be estimated first to verify budget and deadline feasibility."
+      },
+      "observation": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 0,
+        "deadline_gap_minutes": 0,
+        "feasible": true
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "generate_script",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Premium has a successful feasible estimate: cost 12 is within budget 15, and completion at 10:30 precedes the 12:00 deadline. Retrieved assets are available and no script is checkpointed."
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic generate_script failure"
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "generate_script",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "Premium has a successful feasible estimate of 12 units and completion at 10:30 before the 12:00 deadline. Assets are checkpointed; the first generation attempt failed, so one retry is allowed."
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic generate_script failure"
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Incomplete: premium script generation failed twice, exhausting the permitted retry. No successful script is available to save a complete plan."
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

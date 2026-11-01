@@ -35,3 +35,11 @@ README 和评估文档只记录实际运行结果。AI 使用与人工贡献据�
 `py scripts/evaluate.py media --provider mock --tests` 重跑全部离线场景与测试。
 `py scripts/evaluate.py media --provider codex --cases normal conflict save_failure` 重跑真实模型路径。
 每份 `examples/media/*.mock.json` / `*.codex.json` 同时包含实际输出与逐步 Trace。
+
+## 第二题评审入口
+
+[需求与验收](docs/task2/01-requirements.md) · [方案](docs/task2/02-solution.md) · [评估与复现](docs/task2/03-evaluation.md) · [AI 使用](docs/task2/04-ai-usage.md) · [复盘](docs/task2/05-retrospective.md)
+
+`py -m xiaoying_agents planning --input examples/planning/replan.input.json --provider codex` 运行预算重规划。
+`py scripts/evaluate.py planning --provider mock --tests` 重跑全部离线场景。
+`py scripts/evaluate.py planning --provider codex --cases normal replan tool_failure` 重跑真实模型场景。

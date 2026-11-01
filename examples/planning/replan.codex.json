@@ -1,0 +1,329 @@
+{
+  "task": "planning",
+  "provider": "codex",
+  "real_model": true,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "plan-replan",
+    "topic": "字幕活动",
+    "budget": 10,
+    "start_at": "2026-11-02T09:00:00+08:00",
+    "deadline": "2026-11-02T12:00:00+08:00"
+  },
+  "result": {
+    "status": "completed",
+    "missing": [],
+    "incomplete_reason": null,
+    "assets": [
+      {
+        "id": "A01",
+        "title": "字幕活动素材",
+        "keywords": [
+          "字幕",
+          "视频",
+          "内容",
+          "subtitles"
+        ],
+        "fact": "支持字幕"
+      }
+    ],
+    "estimates": {
+      "premium": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 2,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      },
+      "lean": {
+        "ok": true,
+        "package": "lean",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 2,
+          "production": 4
+        },
+        "total_cost": 8,
+        "minutes": 45,
+        "end_at": "2026-11-02T09:45:00+08:00",
+        "budget_gap": 0,
+        "deadline_gap_minutes": 0,
+        "feasible": true
+      }
+    },
+    "successful_scripts": {
+      "lean": {
+        "package": "lean",
+        "text": "字幕活动：支持字幕",
+        "source_ids": [
+          "A01"
+        ]
+      }
+    },
+    "saved_plan": {
+      "ok": true,
+      "id": "plan-plan-replan",
+      "duplicate": false,
+      "payload": {
+        "topic": "字幕活动",
+        "budget": 10,
+        "deadline": "2026-11-02T12:00:00+08:00",
+        "estimate": {
+          "ok": true,
+          "package": "lean",
+          "cost_breakdown": {
+            "assets": 2,
+            "script": 2,
+            "production": 4
+          },
+          "total_cost": 8,
+          "minutes": 45,
+          "end_at": "2026-11-02T09:45:00+08:00",
+          "budget_gap": 0,
+          "deadline_gap_minutes": 0,
+          "feasible": true
+        },
+        "script": {
+          "package": "lean",
+          "text": "字幕活动：支持字幕",
+          "source_ids": [
+            "A01"
+          ]
+        },
+        "assets": [
+          {
+            "id": "A01",
+            "title": "字幕活动素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "fact": "支持字幕"
+          }
+        ],
+        "steps": [
+          {
+            "id": "assets",
+            "depends_on": [],
+            "status": "succeeded"
+          },
+          {
+            "id": "estimate",
+            "depends_on": [
+              "assets"
+            ],
+            "status": "succeeded"
+          },
+          {
+            "id": "script",
+            "depends_on": [
+              "estimate"
+            ],
+            "status": "succeeded"
+          }
+        ]
+      }
+    },
+    "total_cost": 8,
+    "resumed_from_checkpoint": false,
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_assets",
+        "arguments": {
+          "query": "字幕活动"
+        },
+        "reason": "必填信息齐全，当前尚无素材；先检索主题素材，再评估 premium 方案。"
+      },
+      "observation": {
+        "ok": true,
+        "assets": [
+          {
+            "id": "A01",
+            "title": "字幕活动素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "内容",
+              "subtitles"
+            ],
+            "fact": "支持字幕"
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "premium"
+        },
+        "reason": "必填信息齐全，素材已成功检索；按要求先评估 premium 的总成本和完成时间。"
+      },
+      "observation": {
+        "ok": true,
+        "package": "premium",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 4,
+          "production": 6
+        },
+        "total_cost": 12,
+        "minutes": 90,
+        "end_at": "2026-11-02T10:30:00+08:00",
+        "budget_gap": 2,
+        "deadline_gap_minutes": 0,
+        "feasible": false
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "estimate_plan",
+        "arguments": {
+          "package": "lean"
+        },
+        "reason": "premium 已评估且总成本 12 超出预算 10；按顺序评估 lean 的成本和完成时间，复用已检索素材。"
+      },
+      "observation": {
+        "ok": true,
+        "package": "lean",
+        "cost_breakdown": {
+          "assets": 2,
+          "script": 2,
+          "production": 4
+        },
+        "total_cost": 8,
+        "minutes": 45,
+        "end_at": "2026-11-02T09:45:00+08:00",
+        "budget_gap": 0,
+        "deadline_gap_minutes": 0,
+        "feasible": true
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "generate_script",
+        "arguments": {
+          "package": "lean"
+        },
+        "reason": "lean 已评估可行：总成本 8，低于预算 10，预计完成时间 09:45 早于截止时间 12:00；素材已检索成功，当前尚无脚本。"
+      },
+      "observation": {
+        "ok": true,
+        "script": {
+          "package": "lean",
+          "text": "字幕活动：支持字幕",
+          "source_ids": [
+            "A01"
+          ]
+        }
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "save_plan",
+        "arguments": {
+          "package": "lean"
+        },
+        "reason": "lean 已评估可行，总成本 8 未超预算 10，预计于截止前的 09:45 完成；素材和脚本均已成功生成，尚未保存。"
+      },
+      "observation": {
+        "ok": true,
+        "id": "plan-plan-replan",
+        "duplicate": false,
+        "payload": {
+          "topic": "字幕活动",
+          "budget": 10,
+          "deadline": "2026-11-02T12:00:00+08:00",
+          "estimate": {
+            "ok": true,
+            "package": "lean",
+            "cost_breakdown": {
+              "assets": 2,
+              "script": 2,
+              "production": 4
+            },
+            "total_cost": 8,
+            "minutes": 45,
+            "end_at": "2026-11-02T09:45:00+08:00",
+            "budget_gap": 0,
+            "deadline_gap_minutes": 0,
+            "feasible": true
+          },
+          "script": {
+            "package": "lean",
+            "text": "字幕活动：支持字幕",
+            "source_ids": [
+              "A01"
+            ]
+          },
+          "assets": [
+            {
+              "id": "A01",
+              "title": "字幕活动素材",
+              "keywords": [
+                "字幕",
+                "视频",
+                "内容",
+                "subtitles"
+              ],
+              "fact": "支持字幕"
+            }
+          ],
+          "steps": [
+            {
+              "id": "assets",
+              "depends_on": [],
+              "status": "succeeded"
+            },
+            {
+              "id": "estimate",
+              "depends_on": [
+                "assets"
+              ],
+              "status": "succeeded"
+            },
+            {
+              "id": "script",
+              "depends_on": [
+                "estimate"
+              ],
+              "status": "succeeded"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 6,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "lean 方案已成功保存，计划 ID 为 plan-plan-replan；总成本 8 未超过预算 10，预计完成时间 2026-11-02T09:45:00+08:00 早于截止时间，素材、估算和脚本均已成功完成。"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}
