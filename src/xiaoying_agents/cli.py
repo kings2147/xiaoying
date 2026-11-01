@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from .core import Store, run
@@ -18,12 +19,17 @@ def get_task(name):
     if name == "knowledge":
         from .knowledge import KnowledgeTask
         return KnowledgeTask
+    if name == "script":
+        from .script import ScriptTask
+        return ScriptTask
     raise ValueError(f"Unknown task: {name}")
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description="Run a bounded content agent; JSON input/output and factual Trace")
-    parser.add_argument("task", choices=["media", "planning", "knowledge"])
+    parser.add_argument("task", choices=["media", "planning", "knowledge", "script"])
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--provider", choices=["mock", "codex", "openai"], default="mock")
     parser.add_argument("--state", default=".runtime/state.sqlite3")

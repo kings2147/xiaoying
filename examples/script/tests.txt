@@ -1,0 +1,16 @@
+test_concurrent_duplicates_are_atomic (tests.test_core.CoreTests.test_concurrent_duplicates_are_atomic) ... ok
+test_durable_idempotency_and_conflicting_payload (tests.test_core.CoreTests.test_durable_idempotency_and_conflicting_payload) ... ok
+test_infinite_model_hits_limit (tests.test_core.CoreTests.test_infinite_model_hits_limit) ... ok
+test_invalid_model_reply_and_redacted_failure (tests.test_core.CoreTests.test_invalid_model_reply_and_redacted_failure) ... ok
+test_duration_revision_rechecked (tests.test_script.ScriptTests.test_duration_revision_rechecked) ... ok
+test_impossible_duration_returns_incomplete (tests.test_script.ScriptTests.test_impossible_duration_returns_incomplete) ... ok
+test_missing_information_and_no_materials (tests.test_script.ScriptTests.test_missing_information_and_no_materials) ... ok
+test_normal_generated_script_and_sources (tests.test_script.ScriptTests.test_normal_generated_script_and_sources) ... ok
+test_revision_invalidates_previous_checks (tests.test_script.ScriptTests.test_revision_invalidates_previous_checks) ... ok
+test_tool_failure (tests.test_script.ScriptTests.test_tool_failure) ... ok
+test_unsupported_claims_cannot_be_injected (tests.test_script.ScriptTests.test_unsupported_claims_cannot_be_injected) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.196s
+
+OK

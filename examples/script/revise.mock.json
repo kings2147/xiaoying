@@ -1,0 +1,420 @@
+{
+  "task": "script",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "topic": "字幕功能",
+    "audience": "新手创作者",
+    "platform": "短视频",
+    "target_seconds": 30,
+    "style": "清晰演示"
+  },
+  "result": {
+    "status": "completed",
+    "missing": [],
+    "script": {
+      "revision": 2,
+      "title": "字幕功能",
+      "scenes": [
+        {
+          "scene": 1,
+          "source_id": "P01",
+          "fact_id": "P01-F1",
+          "visual": "展示素材",
+          "transition_id": "none",
+          "hold_seconds": 1,
+          "narration": "支持字幕。",
+          "fact_quote": "支持字幕"
+        }
+      ],
+      "audience": "新手创作者",
+      "platform": "短视频",
+      "style": "清晰演示"
+    },
+    "duration": {
+      "revision": 2,
+      "scenes": [
+        {
+          "scene": 1,
+          "seconds": 2,
+          "source_id": "P01"
+        }
+      ],
+      "total_seconds": 2,
+      "target_seconds": 30,
+      "passed": true
+    },
+    "rule_check": {
+      "revision": 2,
+      "passed": true,
+      "risks": [],
+      "citations": [
+        {
+          "source_id": "P01",
+          "fact_id": "P01-F1",
+          "quote": "支持字幕"
+        }
+      ]
+    },
+    "previous_revisions": [
+      {
+        "draft": {
+          "revision": 1,
+          "title": "字幕功能",
+          "scenes": [
+            {
+              "scene": 1,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "opening",
+              "hold_seconds": 8,
+              "narration": "今天通过一个简短的画面，展示素材中已经确认的一项产品功能。支持字幕。",
+              "fact_quote": "支持字幕"
+            },
+            {
+              "scene": 2,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "detail",
+              "hold_seconds": 8,
+              "narration": "接下来把镜头停留在功能界面，让观众看清本段需要展示的内容。支持字幕。",
+              "fact_quote": "支持字幕"
+            },
+            {
+              "scene": 3,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "closing",
+              "hold_seconds": 8,
+              "narration": "本次演示先到这里，后续可以根据自己的表达需要调整分镜。支持字幕。",
+              "fact_quote": "支持字幕"
+            }
+          ],
+          "audience": "新手创作者",
+          "platform": "短视频",
+          "style": "清晰演示"
+        },
+        "duration": {
+          "revision": 1,
+          "scenes": [
+            {
+              "scene": 1,
+              "seconds": 16,
+              "source_id": "P01"
+            },
+            {
+              "scene": 2,
+              "seconds": 16,
+              "source_id": "P01"
+            },
+            {
+              "scene": 3,
+              "seconds": 16,
+              "source_id": "P01"
+            }
+          ],
+          "total_seconds": 48,
+          "target_seconds": 30,
+          "passed": false
+        },
+        "rules": {
+          "revision": 1,
+          "passed": true,
+          "risks": [],
+          "citations": [
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "quote": "支持字幕"
+            },
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "quote": "支持字幕"
+            },
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "quote": "支持字幕"
+            }
+          ]
+        }
+      }
+    ],
+    "errors": [],
+    "incomplete_reason": null
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_materials",
+        "arguments": {
+          "query": "字幕功能"
+        },
+        "reason": "Retrieve product facts"
+      },
+      "observation": {
+        "ok": true,
+        "materials": [
+          {
+            "id": "P01",
+            "title": "字幕产品素材",
+            "keywords": [
+              "字幕",
+              "视频",
+              "subtitles"
+            ],
+            "facts": [
+              {
+                "id": "P01-F1",
+                "text": "支持字幕"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "draft_script",
+        "arguments": {
+          "title": "字幕功能",
+          "scenes": [
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "opening",
+              "hold_seconds": 8
+            },
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "detail",
+              "hold_seconds": 8
+            },
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "closing",
+              "hold_seconds": 8
+            }
+          ]
+        },
+        "reason": "Construct initial detailed storyboard using sourced facts"
+      },
+      "observation": {
+        "ok": true,
+        "draft": {
+          "revision": 1,
+          "title": "字幕功能",
+          "scenes": [
+            {
+              "scene": 1,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "opening",
+              "hold_seconds": 8,
+              "narration": "今天通过一个简短的画面，展示素材中已经确认的一项产品功能。支持字幕。",
+              "fact_quote": "支持字幕"
+            },
+            {
+              "scene": 2,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "detail",
+              "hold_seconds": 8,
+              "narration": "接下来把镜头停留在功能界面，让观众看清本段需要展示的内容。支持字幕。",
+              "fact_quote": "支持字幕"
+            },
+            {
+              "scene": 3,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "closing",
+              "hold_seconds": 8,
+              "narration": "本次演示先到这里，后续可以根据自己的表达需要调整分镜。支持字幕。",
+              "fact_quote": "支持字幕"
+            }
+          ],
+          "audience": "新手创作者",
+          "platform": "短视频",
+          "style": "清晰演示"
+        },
+        "checks_invalidated": true
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "estimate_duration",
+        "arguments": {},
+        "reason": "Validate the current script revision"
+      },
+      "observation": {
+        "ok": true,
+        "revision": 1,
+        "scenes": [
+          {
+            "scene": 1,
+            "seconds": 16,
+            "source_id": "P01"
+          },
+          {
+            "scene": 2,
+            "seconds": 16,
+            "source_id": "P01"
+          },
+          {
+            "scene": 3,
+            "seconds": 16,
+            "source_id": "P01"
+          }
+        ],
+        "total_seconds": 48,
+        "target_seconds": 30,
+        "passed": false
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {},
+        "reason": "Validate the current script revision"
+      },
+      "observation": {
+        "ok": true,
+        "revision": 1,
+        "passed": true,
+        "risks": [],
+        "citations": [
+          {
+            "source_id": "P01",
+            "fact_id": "P01-F1",
+            "quote": "支持字幕"
+          },
+          {
+            "source_id": "P01",
+            "fact_id": "P01-F1",
+            "quote": "支持字幕"
+          },
+          {
+            "source_id": "P01",
+            "fact_id": "P01-F1",
+            "quote": "支持字幕"
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "draft_script",
+        "arguments": {
+          "title": "字幕功能",
+          "scenes": [
+            {
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "none",
+              "hold_seconds": 1
+            }
+          ]
+        },
+        "reason": "Compress after observing failed duration check"
+      },
+      "observation": {
+        "ok": true,
+        "draft": {
+          "revision": 2,
+          "title": "字幕功能",
+          "scenes": [
+            {
+              "scene": 1,
+              "source_id": "P01",
+              "fact_id": "P01-F1",
+              "visual": "展示素材",
+              "transition_id": "none",
+              "hold_seconds": 1,
+              "narration": "支持字幕。",
+              "fact_quote": "支持字幕"
+            }
+          ],
+          "audience": "新手创作者",
+          "platform": "短视频",
+          "style": "清晰演示"
+        },
+        "checks_invalidated": true
+      }
+    },
+    {
+      "step": 6,
+      "action": {
+        "tool": "estimate_duration",
+        "arguments": {},
+        "reason": "Validate the current script revision"
+      },
+      "observation": {
+        "ok": true,
+        "revision": 2,
+        "scenes": [
+          {
+            "scene": 1,
+            "seconds": 2,
+            "source_id": "P01"
+          }
+        ],
+        "total_seconds": 2,
+        "target_seconds": 30,
+        "passed": true
+      }
+    },
+    {
+      "step": 7,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {},
+        "reason": "Validate the current script revision"
+      },
+      "observation": {
+        "ok": true,
+        "revision": 2,
+        "passed": true,
+        "risks": [],
+        "citations": [
+          {
+            "source_id": "P01",
+            "fact_id": "P01-F1",
+            "quote": "支持字幕"
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Current revision passes duration and facts rules"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}
