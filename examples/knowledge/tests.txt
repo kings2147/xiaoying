@@ -1,0 +1,17 @@
+test_concurrent_duplicates_are_atomic (tests.test_core.CoreTests.test_concurrent_duplicates_are_atomic) ... ok
+test_durable_idempotency_and_conflicting_payload (tests.test_core.CoreTests.test_durable_idempotency_and_conflicting_payload) ... ok
+test_infinite_model_hits_limit (tests.test_core.CoreTests.test_infinite_model_hits_limit) ... ok
+test_invalid_model_reply_and_redacted_failure (tests.test_core.CoreTests.test_invalid_model_reply_and_redacted_failure) ... ok
+test_changed_original_changes_answer (tests.test_knowledge.KnowledgeTests.test_changed_original_changes_answer) ... ok
+test_clear_answer_has_exact_support (tests.test_knowledge.KnowledgeTests.test_clear_answer_has_exact_support) ... ok
+test_conflict_does_not_choose_latest (tests.test_knowledge.KnowledgeTests.test_conflict_does_not_choose_latest) ... ok
+test_guard_against_cherry_picking_and_unread_source (tests.test_knowledge.KnowledgeTests.test_guard_against_cherry_picking_and_unread_source) ... ok
+test_inconsistent_fact_index_rejected (tests.test_knowledge.KnowledgeTests.test_inconsistent_fact_index_rejected) ... ok
+test_outside_knowledge_and_rewritten_query (tests.test_knowledge.KnowledgeTests.test_outside_knowledge_and_rewritten_query) ... ok
+test_paraphrase_and_followup (tests.test_knowledge.KnowledgeTests.test_paraphrase_and_followup) ... ok
+test_tool_failure_never_fabricates_answer (tests.test_knowledge.KnowledgeTests.test_tool_failure_never_fabricates_answer) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.225s
+
+OK

@@ -1,0 +1,107 @@
+{
+  "task": "knowledge",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "question": "报销期限多久？",
+    "simulate_failures": {
+      "read_document": -1
+    }
+  },
+  "result": {
+    "status": "incomplete",
+    "answer": null,
+    "citations": [],
+    "conflicts": {},
+    "gaps": [
+      "工具读取失败或资料未读全"
+    ],
+    "errors": [
+      {
+        "tool": "read_document",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      },
+      {
+        "tool": "read_document",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_documents",
+        "arguments": {
+          "query": " 报销期限多久？"
+        },
+        "reason": "Search with dialogue context"
+      },
+      "observation": {
+        "ok": true,
+        "matches": [
+          {
+            "id": "D01",
+            "version_date": "2026-09-01",
+            "title": "费用报销制度 A",
+            "score": 1
+          },
+          {
+            "id": "D02",
+            "version_date": "2026-10-01",
+            "title": "费用报销制度 B",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D01"
+        },
+        "reason": "Verify original text and version"
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D01"
+        },
+        "reason": "Verify original text and version"
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Source read failed; no unsupported answer"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

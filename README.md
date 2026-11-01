@@ -43,3 +43,11 @@ README 和评估文档只记录实际运行结果。AI 使用与人工贡献据�
 `py -m xiaoying_agents planning --input examples/planning/replan.input.json --provider codex` 运行预算重规划。
 `py scripts/evaluate.py planning --provider mock --tests` 重跑全部离线场景。
 `py scripts/evaluate.py planning --provider codex --cases normal replan tool_failure` 重跑真实模型场景。
+
+## 第三题评审入口
+
+[需求与验收](docs/task3/01-requirements.md) · [方案](docs/task3/02-solution.md) · [评估与复现](docs/task3/03-evaluation.md) · [AI 使用](docs/task3/04-ai-usage.md) · [复盘](docs/task3/05-retrospective.md)
+
+`py -m xiaoying_agents knowledge --input examples/knowledge/conflict.input.json --provider codex` 运行制度冲突问答。
+`py scripts/evaluate.py knowledge --provider mock --tests` 重跑全部离线场景。
+`py scripts/evaluate.py knowledge --provider codex --cases normal conflict tool_failure` 重跑真实模型场景。

@@ -6,6 +6,7 @@ import io
 import json
 import platform
 import sys
+import time
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
@@ -29,6 +30,7 @@ def main():
     parser.add_argument("--cases", nargs="*")
     parser.add_argument("--tests", action="store_true")
     args = parser.parse_args()
+    started = time.monotonic()
     folder = ROOT / "examples" / args.task
     expectations = json.loads((folder / "expectations.json").read_text(encoding="utf-8"))
     cases = args.cases or list(expectations)
@@ -59,6 +61,8 @@ def main():
         (folder / "tests.txt").write_text(stream.getvalue(), encoding="utf-8")
         report["tests"] = {"run": result.testsRun, "failures": len(result.failures), "errors": len(result.errors), "passed": result.wasSuccessful()}
     report["passed"] = all(e["passed"] for e in report["cases"]) and report.get("tests", {}).get("passed", True)
+    report["finished_at_utc"] = datetime.now(timezone.utc).isoformat()
+    report["elapsed_seconds"] = round(time.monotonic() - started, 3)
     write(folder / f"evaluation.{args.provider}.json", report)
     return 0 if report["passed"] else 1
 

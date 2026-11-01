@@ -1,0 +1,107 @@
+{
+  "task": "knowledge",
+  "provider": "codex",
+  "real_model": true,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "question": "报销期限多久？",
+    "simulate_failures": {
+      "read_document": -1
+    }
+  },
+  "result": {
+    "status": "incomplete",
+    "answer": null,
+    "citations": [],
+    "conflicts": {},
+    "gaps": [
+      "工具读取失败或资料未读全"
+    ],
+    "errors": [
+      {
+        "tool": "read_document",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      },
+      {
+        "tool": "read_document",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_documents",
+        "arguments": {
+          "query": "报销"
+        },
+        "reason": "问题询问报销期限，当前尚未检索到政策来源。"
+      },
+      "observation": {
+        "ok": true,
+        "matches": [
+          {
+            "id": "D01",
+            "version_date": "2026-09-01",
+            "title": "费用报销制度 A",
+            "score": 1
+          },
+          {
+            "id": "D02",
+            "version_date": "2026-10-01",
+            "title": "费用报销制度 B",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D01"
+        },
+        "reason": "已检索到两份报销制度，需逐一读取原文以核实报销期限及适用条件。"
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D01"
+        },
+        "reason": "首次读取 D01 失败，重试一次以获取报销期限及适用条件的原文依据。"
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic read_document failure"
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "读取 D01 首次失败后已重试一次，仍返回 OSError；缺少政策原文依据，无法回答报销期限。"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

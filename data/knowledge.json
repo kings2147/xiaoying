@@ -1,0 +1,5 @@
+[
+  {"id":"D01","version_date":"2026-09-01","topic":"报销","title":"费用报销制度 A","text":"报销申请须在费用发生后30天内提交。","facts":{"reimbursement_days":"30天"}},
+  {"id":"D02","version_date":"2026-10-01","topic":"报销","title":"费用报销制度 B","text":"报销申请须在费用发生后15天内提交。","facts":{"reimbursement_days":"15天"}},
+  {"id":"D03","version_date":"2026-10-15","topic":"产品字幕","title":"产品功能 FAQ","text":"产品支持字幕。","facts":{"subtitle_support":"支持字幕"}}
+]

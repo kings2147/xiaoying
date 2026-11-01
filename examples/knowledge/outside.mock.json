@@ -1,0 +1,62 @@
+{
+  "task": "knowledge",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "question": "火星地表的温度是多少？"
+  },
+  "result": {
+    "status": "out_of_scope",
+    "answer": null,
+    "citations": [],
+    "conflicts": {},
+    "gaps": [
+      "需要问题或相关资料"
+    ],
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_documents",
+        "arguments": {
+          "query": " 火星地表的温度是多少？"
+        },
+        "reason": "Search with dialogue context"
+      },
+      "observation": {
+        "ok": true,
+        "matches": []
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "search_documents",
+        "arguments": {
+          "query": "火星地表的温度是多少"
+        },
+        "reason": "Rewrite empty retrieval query"
+      },
+      "observation": {
+        "ok": true,
+        "matches": []
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "No supporting sources"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

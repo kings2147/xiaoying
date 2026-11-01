@@ -1,0 +1,111 @@
+{
+  "task": "knowledge",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "question": "费用报账能在几天内完成？",
+    "document_scope": [
+      "D01"
+    ]
+  },
+  "result": {
+    "status": "completed",
+    "answer": "D01（2026-09-01）：报销申请须在费用发生后30天内提交。",
+    "citations": [
+      {
+        "document_id": "D01",
+        "version_date": "2026-09-01",
+        "quote": "报销申请须在费用发生后30天内提交。"
+      }
+    ],
+    "conflicts": {},
+    "gaps": [],
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_documents",
+        "arguments": {
+          "query": " 费用报账能在几天内完成？"
+        },
+        "reason": "Search with dialogue context"
+      },
+      "observation": {
+        "ok": true,
+        "matches": [
+          {
+            "id": "D01",
+            "version_date": "2026-09-01",
+            "title": "费用报销制度 A",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D01"
+        },
+        "reason": "Verify original text and version"
+      },
+      "observation": {
+        "ok": true,
+        "document": {
+          "id": "D01",
+          "version_date": "2026-09-01",
+          "topic": "报销",
+          "title": "费用报销制度 A",
+          "text": "报销申请须在费用发生后30天内提交。",
+          "facts": {
+            "reimbursement_days": "30天"
+          }
+        }
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "answer_from_sources",
+        "arguments": {
+          "document_ids": [
+            "D01"
+          ]
+        },
+        "reason": "Cite all read sources and disclose conflicting values"
+      },
+      "observation": {
+        "ok": true,
+        "status": "completed",
+        "answer": "D01（2026-09-01）：报销申请须在费用发生后30天内提交。",
+        "citations": [
+          {
+            "document_id": "D01",
+            "version_date": "2026-09-01",
+            "quote": "报销申请须在费用发生后30天内提交。"
+          }
+        ],
+        "conflicts": {},
+        "gaps": []
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Answer constructed or question missing"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

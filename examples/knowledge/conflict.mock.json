@@ -1,0 +1,162 @@
+{
+  "task": "knowledge",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "question": "报销期限多久？"
+  },
+  "result": {
+    "status": "conflict",
+    "answer": "D01（2026-09-01）：报销申请须在费用发生后30天内提交。；D02（2026-10-01）：报销申请须在费用发生后15天内提交。",
+    "citations": [
+      {
+        "document_id": "D01",
+        "version_date": "2026-09-01",
+        "quote": "报销申请须在费用发生后30天内提交。"
+      },
+      {
+        "document_id": "D02",
+        "version_date": "2026-10-01",
+        "quote": "报销申请须在费用发生后15天内提交。"
+      }
+    ],
+    "conflicts": {
+      "reimbursement_days": [
+        "15天",
+        "30天"
+      ]
+    },
+    "gaps": [
+      "请确认适用制度范围或明确的优先级；日期本身不构成适用依据。"
+    ],
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "search_documents",
+        "arguments": {
+          "query": " 报销期限多久？"
+        },
+        "reason": "Search with dialogue context"
+      },
+      "observation": {
+        "ok": true,
+        "matches": [
+          {
+            "id": "D01",
+            "version_date": "2026-09-01",
+            "title": "费用报销制度 A",
+            "score": 1
+          },
+          {
+            "id": "D02",
+            "version_date": "2026-10-01",
+            "title": "费用报销制度 B",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D01"
+        },
+        "reason": "Verify original text and version"
+      },
+      "observation": {
+        "ok": true,
+        "document": {
+          "id": "D01",
+          "version_date": "2026-09-01",
+          "topic": "报销",
+          "title": "费用报销制度 A",
+          "text": "报销申请须在费用发生后30天内提交。",
+          "facts": {
+            "reimbursement_days": "30天"
+          }
+        }
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "read_document",
+        "arguments": {
+          "document_id": "D02"
+        },
+        "reason": "Verify original text and version"
+      },
+      "observation": {
+        "ok": true,
+        "document": {
+          "id": "D02",
+          "version_date": "2026-10-01",
+          "topic": "报销",
+          "title": "费用报销制度 B",
+          "text": "报销申请须在费用发生后15天内提交。",
+          "facts": {
+            "reimbursement_days": "15天"
+          }
+        }
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "answer_from_sources",
+        "arguments": {
+          "document_ids": [
+            "D01",
+            "D02"
+          ]
+        },
+        "reason": "Cite all read sources and disclose conflicting values"
+      },
+      "observation": {
+        "ok": true,
+        "status": "conflict",
+        "answer": "D01（2026-09-01）：报销申请须在费用发生后30天内提交。；D02（2026-10-01）：报销申请须在费用发生后15天内提交。",
+        "citations": [
+          {
+            "document_id": "D01",
+            "version_date": "2026-09-01",
+            "quote": "报销申请须在费用发生后30天内提交。"
+          },
+          {
+            "document_id": "D02",
+            "version_date": "2026-10-01",
+            "quote": "报销申请须在费用发生后15天内提交。"
+          }
+        ],
+        "conflicts": {
+          "reimbursement_days": [
+            "15天",
+            "30天"
+          ]
+        },
+        "gaps": [
+          "请确认适用制度范围或明确的优先级；日期本身不构成适用依据。"
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Answer constructed or question missing"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}
