@@ -1,0 +1,2 @@
+# Python >=3.11. Runtime and tests use the standard library; no third-party packages.
+# Optional editable install: python -m pip install -e .
