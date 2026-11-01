@@ -1,0 +1,94 @@
+{
+  "task": "media",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "media-missing",
+    "material_ids": [
+      "M03"
+    ],
+    "requirements": {
+      "M03": {
+        "slot": "2026-11-02T18:00:00+08:00",
+        "hard": true
+      }
+    }
+  },
+  "result": {
+    "status": "needs_information",
+    "items": [
+      {
+        "material_id": "M03",
+        "review_status": "needs_information",
+        "risks": [],
+        "suggested_slot": null,
+        "pending_confirmation": false,
+        "metadata": {
+          "title": "",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": [
+          "title"
+        ]
+      }
+    ],
+    "missing": [],
+    "draft": null,
+    "publication_status": "not_published",
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "read_material",
+        "arguments": {
+          "material_id": "M03"
+        },
+        "reason": "Read supplied material"
+      },
+      "observation": {
+        "ok": true,
+        "material": {
+          "title": "",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {
+          "material_id": "M03"
+        },
+        "reason": "Check observed metadata"
+      },
+      "observation": {
+        "ok": false,
+        "review_status": "needs_information",
+        "risks": [],
+        "missing": [
+          "title"
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Return actual draft or unresolved state"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

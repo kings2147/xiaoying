@@ -1,0 +1,169 @@
+{
+  "task": "media",
+  "provider": "codex",
+  "real_model": true,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "media-failure",
+    "material_ids": [
+      "M01"
+    ],
+    "requirements": {
+      "M01": {
+        "slot": "2026-11-02T18:00:00+08:00",
+        "hard": true
+      }
+    },
+    "simulate_failures": {
+      "save_draft": -1
+    }
+  },
+  "result": {
+    "status": "failed",
+    "items": [
+      {
+        "material_id": "M01",
+        "review_status": "approved",
+        "risks": [],
+        "suggested_slot": "2026-11-02T18:00:00+08:00",
+        "pending_confirmation": false,
+        "metadata": {
+          "title": "字幕功能介绍",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    ],
+    "missing": [],
+    "draft": null,
+    "publication_status": "not_published",
+    "errors": [
+      {
+        "tool": "save_draft",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic save_draft failure"
+      },
+      {
+        "tool": "save_draft",
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic save_draft failure"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "read_material",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "M01 is unread; its metadata must be read before checking rules and querying slots."
+      },
+      "observation": {
+        "ok": true,
+        "material": {
+          "title": "字幕功能介绍",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "M01 metadata was read successfully; its completeness, rights, and sensitive-content rules have not yet been checked."
+      },
+      "observation": {
+        "ok": true,
+        "review_status": "approved",
+        "risks": [],
+        "missing": []
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "query_slots",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "M01 metadata is complete and its rules check passed with no risks; slot availability has not yet been queried."
+      },
+      "observation": {
+        "ok": true,
+        "requested_slot": "2026-11-02T18:00:00+08:00",
+        "conflict": false,
+        "available_slots": [
+          "2026-11-02T18:00:00+08:00",
+          "2026-11-02T19:00:00+08:00",
+          "2026-11-02T20:00:00+08:00"
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "propose_slot",
+        "arguments": {
+          "material_id": "M01",
+          "slot": "2026-11-02T18:00:00+08:00"
+        },
+        "reason": "M01 metadata is complete, its rules check passed without risks, and the required slot was returned as available."
+      },
+      "observation": {
+        "ok": true,
+        "suggested_slot": "2026-11-02T18:00:00+08:00",
+        "pending_confirmation": false,
+        "state": "draft_proposal"
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "save_draft",
+        "arguments": {},
+        "reason": "M01 has a successful draft proposal for its exact required slot, with no missing metadata, rules risks, or pending confirmation; no save has been attempted."
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic save_draft failure"
+      }
+    },
+    {
+      "step": 6,
+      "action": {
+        "tool": "save_draft",
+        "arguments": {},
+        "reason": "M01 has a valid draft proposal for its exact required slot. The first save failed with OSError; this is the single allowed save retry."
+      },
+      "observation": {
+        "ok": false,
+        "error": "OSError",
+        "message": "synthetic save_draft failure"
+      }
+    },
+    {
+      "step": 7,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "save_draft failed with OSError on the initial attempt and the single allowed retry; stopping with failure."
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

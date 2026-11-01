@@ -1,0 +1,94 @@
+{
+  "task": "media",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "media-risk",
+    "material_ids": [
+      "M02"
+    ],
+    "requirements": {
+      "M02": {
+        "slot": "2026-11-02T18:00:00+08:00",
+        "hard": true
+      }
+    }
+  },
+  "result": {
+    "status": "blocked",
+    "items": [
+      {
+        "material_id": "M02",
+        "review_status": "blocked",
+        "risks": [
+          "rights_not_cleared"
+        ],
+        "suggested_slot": null,
+        "pending_confirmation": false,
+        "metadata": {
+          "title": "未授权配乐片段",
+          "rights_cleared": false,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    ],
+    "missing": [],
+    "draft": null,
+    "publication_status": "not_published",
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "read_material",
+        "arguments": {
+          "material_id": "M02"
+        },
+        "reason": "Read supplied material"
+      },
+      "observation": {
+        "ok": true,
+        "material": {
+          "title": "未授权配乐片段",
+          "rights_cleared": false,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {
+          "material_id": "M02"
+        },
+        "reason": "Check observed metadata"
+      },
+      "observation": {
+        "ok": false,
+        "review_status": "blocked",
+        "risks": [
+          "rights_not_cleared"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Return actual draft or unresolved state"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

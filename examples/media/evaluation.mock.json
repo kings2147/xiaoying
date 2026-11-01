@@ -1,0 +1,56 @@
+{
+  "provider": "mock",
+  "real_model": false,
+  "python": "3.11.15",
+  "executed_at_utc": "2026-11-01T06:02:06.568373+00:00",
+  "cases": [
+    {
+      "case": "normal",
+      "expected": "completed",
+      "actual": "completed",
+      "termination": "model_finished",
+      "steps": 6,
+      "passed": true,
+      "duplicate_passed": true
+    },
+    {
+      "case": "conflict",
+      "expected": "awaiting_confirmation",
+      "actual": "awaiting_confirmation",
+      "termination": "model_finished",
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "case": "missing",
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "termination": "model_finished",
+      "steps": 3,
+      "passed": true
+    },
+    {
+      "case": "risk",
+      "expected": "blocked",
+      "actual": "blocked",
+      "termination": "model_finished",
+      "steps": 3,
+      "passed": true
+    },
+    {
+      "case": "save_failure",
+      "expected": "failed",
+      "actual": "failed",
+      "termination": "model_finished",
+      "steps": 7,
+      "passed": true
+    }
+  ],
+  "tests": {
+    "run": 10,
+    "failures": 0,
+    "errors": 0,
+    "passed": true
+  },
+  "passed": true
+}

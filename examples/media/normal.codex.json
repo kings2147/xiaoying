@@ -1,0 +1,180 @@
+{
+  "task": "media",
+  "provider": "codex",
+  "real_model": true,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "media-normal",
+    "material_ids": [
+      "M01"
+    ],
+    "requirements": {
+      "M01": {
+        "slot": "2026-11-02T18:00:00+08:00",
+        "hard": true
+      }
+    }
+  },
+  "result": {
+    "status": "completed",
+    "items": [
+      {
+        "material_id": "M01",
+        "review_status": "approved",
+        "risks": [],
+        "suggested_slot": "2026-11-02T18:00:00+08:00",
+        "pending_confirmation": false,
+        "metadata": {
+          "title": "字幕功能介绍",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    ],
+    "missing": [],
+    "draft": {
+      "ok": true,
+      "id": "media-media-normal",
+      "duplicate": false,
+      "payload": {
+        "state": "draft",
+        "items": [
+          {
+            "material_id": "M01",
+            "review_status": "approved",
+            "risks": [],
+            "suggested_slot": "2026-11-02T18:00:00+08:00",
+            "pending_confirmation": false,
+            "metadata": {
+              "title": "字幕功能介绍",
+              "rights_cleared": true,
+              "sensitive": false
+            },
+            "missing": []
+          }
+        ]
+      }
+    },
+    "publication_status": "not_published",
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "read_material",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "M01 is unread; its metadata must be read before checking rules and querying slots."
+      },
+      "observation": {
+        "ok": true,
+        "material": {
+          "title": "字幕功能介绍",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "M01 metadata was read successfully with no missing fields; its rules check is the next required step."
+      },
+      "observation": {
+        "ok": true,
+        "review_status": "approved",
+        "risks": [],
+        "missing": []
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "query_slots",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "M01 metadata is complete and its rules check passed with no risks; available slots must be queried before proposing a slot."
+      },
+      "observation": {
+        "ok": true,
+        "requested_slot": "2026-11-02T18:00:00+08:00",
+        "conflict": false,
+        "available_slots": [
+          "2026-11-02T18:00:00+08:00",
+          "2026-11-02T19:00:00+08:00",
+          "2026-11-02T20:00:00+08:00"
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "propose_slot",
+        "arguments": {
+          "material_id": "M01",
+          "slot": "2026-11-02T18:00:00+08:00"
+        },
+        "reason": "M01 metadata is complete, its rules check passed without risks, and the requested slot was returned as available with no conflict."
+      },
+      "observation": {
+        "ok": true,
+        "suggested_slot": "2026-11-02T18:00:00+08:00",
+        "pending_confirmation": false,
+        "state": "draft_proposal"
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "save_draft",
+        "arguments": {},
+        "reason": "M01 passed metadata and rules checks, and its requested available slot was successfully proposed. All requested materials have proposals, and no draft has been saved."
+      },
+      "observation": {
+        "ok": true,
+        "id": "media-media-normal",
+        "duplicate": false,
+        "payload": {
+          "state": "draft",
+          "items": [
+            {
+              "material_id": "M01",
+              "review_status": "approved",
+              "risks": [],
+              "suggested_slot": "2026-11-02T18:00:00+08:00",
+              "pending_confirmation": false,
+              "metadata": {
+                "title": "字幕功能介绍",
+                "rights_cleared": true,
+                "sensitive": false
+              },
+              "missing": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 6,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "save_draft returned ok:true with state draft for M01; the successful save is a required stopping point."
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

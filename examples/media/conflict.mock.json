@@ -1,0 +1,182 @@
+{
+  "task": "media",
+  "provider": "mock",
+  "real_model": false,
+  "termination": "model_finished",
+  "model_error": null,
+  "input": {
+    "request_id": "media-conflict",
+    "material_ids": [
+      "M01"
+    ],
+    "requirements": {
+      "M01": {
+        "slot": "2026-11-02T18:00:00+08:00",
+        "hard": true
+      }
+    },
+    "occupied_slots": [
+      "2026-11-02T18:00:00+08:00"
+    ]
+  },
+  "result": {
+    "status": "awaiting_confirmation",
+    "items": [
+      {
+        "material_id": "M01",
+        "review_status": "approved",
+        "risks": [],
+        "suggested_slot": "2026-11-02T19:00:00+08:00",
+        "pending_confirmation": true,
+        "metadata": {
+          "title": "字幕功能介绍",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    ],
+    "missing": [],
+    "draft": {
+      "ok": true,
+      "id": "media-media-conflict",
+      "duplicate": false,
+      "payload": {
+        "state": "draft",
+        "items": [
+          {
+            "material_id": "M01",
+            "review_status": "approved",
+            "risks": [],
+            "suggested_slot": "2026-11-02T19:00:00+08:00",
+            "pending_confirmation": true,
+            "metadata": {
+              "title": "字幕功能介绍",
+              "rights_cleared": true,
+              "sensitive": false
+            },
+            "missing": []
+          }
+        ]
+      }
+    },
+    "publication_status": "not_published",
+    "errors": []
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": {
+        "tool": "read_material",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "Read supplied material"
+      },
+      "observation": {
+        "ok": true,
+        "material": {
+          "title": "字幕功能介绍",
+          "rights_cleared": true,
+          "sensitive": false
+        },
+        "missing": []
+      }
+    },
+    {
+      "step": 2,
+      "action": {
+        "tool": "check_rules",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "Check observed metadata"
+      },
+      "observation": {
+        "ok": true,
+        "review_status": "approved",
+        "risks": [],
+        "missing": []
+      }
+    },
+    {
+      "step": 3,
+      "action": {
+        "tool": "query_slots",
+        "arguments": {
+          "material_id": "M01"
+        },
+        "reason": "Look up availability"
+      },
+      "observation": {
+        "ok": true,
+        "requested_slot": "2026-11-02T18:00:00+08:00",
+        "conflict": true,
+        "available_slots": [
+          "2026-11-02T19:00:00+08:00",
+          "2026-11-02T20:00:00+08:00"
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": {
+        "tool": "propose_slot",
+        "arguments": {
+          "material_id": "M01",
+          "slot": "2026-11-02T19:00:00+08:00"
+        },
+        "reason": "Use available slot; preserve confirmation boundary"
+      },
+      "observation": {
+        "ok": true,
+        "suggested_slot": "2026-11-02T19:00:00+08:00",
+        "pending_confirmation": true,
+        "state": "draft_proposal"
+      }
+    },
+    {
+      "step": 5,
+      "action": {
+        "tool": "save_draft",
+        "arguments": {},
+        "reason": "Save reviewed proposals idempotently"
+      },
+      "observation": {
+        "ok": true,
+        "id": "media-media-conflict",
+        "duplicate": false,
+        "payload": {
+          "state": "draft",
+          "items": [
+            {
+              "material_id": "M01",
+              "review_status": "approved",
+              "risks": [],
+              "suggested_slot": "2026-11-02T19:00:00+08:00",
+              "pending_confirmation": true,
+              "metadata": {
+                "title": "字幕功能介绍",
+                "rights_cleared": true,
+                "sensitive": false
+              },
+              "missing": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 6,
+      "action": {
+        "tool": "finish",
+        "arguments": {},
+        "reason": "Return actual draft or unresolved state"
+      },
+      "observation": {
+        "ok": true,
+        "message": "finish requested"
+      }
+    }
+  ]
+}

@@ -10,7 +10,8 @@ Python 3.11+，运行和测试仅用标准库。PowerShell：
 ```powershell
 $env:PYTHONPATH = "src"
 python -m unittest discover -s tests -v
-# 后续每题提供独立输入、命令和 examples 证据。
+py -m xiaoying_agents media --input examples/media/conflict.input.json --provider mock
+py -m xiaoying_agents media --input examples/media/conflict.input.json --provider codex
 ```
 
 也可 `python -m pip install -e .` 后使用 `xiaoying` 命令。模型入口：
@@ -26,3 +27,11 @@ python -m unittest discover -s tests -v
 每题依次完成需求与验收映射、工具/决策实现、自动化测试、实际示例运行、五份文档、Git commit。
 每次工具调用的参数、结果和下一步简要依据存入 Trace；达到步数上限明确返回 incomplete。
 README 和评估文档只记录实际运行结果。AI 使用与人工贡献据实记载。
+
+## 第一题评审入口
+
+[需求与验收](docs/task1/01-requirements.md) · [方案](docs/task1/02-solution.md) · [评估与复现](docs/task1/03-evaluation.md) · [AI 使用](docs/task1/04-ai-usage.md) · [复盘](docs/task1/05-retrospective.md)
+
+`py scripts/evaluate.py media --provider mock --tests` 重跑全部离线场景与测试。
+`py scripts/evaluate.py media --provider codex --cases normal conflict save_failure` 重跑真实模型路径。
+每份 `examples/media/*.mock.json` / `*.codex.json` 同时包含实际输出与逐步 Trace。

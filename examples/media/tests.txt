@@ -1,0 +1,15 @@
+test_durable_idempotency_and_conflicting_payload (tests.test_core.CoreTests.test_durable_idempotency_and_conflicting_payload) ... ok
+test_infinite_model_hits_limit (tests.test_core.CoreTests.test_infinite_model_hits_limit) ... ok
+test_invalid_model_reply_and_redacted_failure (tests.test_core.CoreTests.test_invalid_model_reply_and_redacted_failure) ... ok
+test_conflict_requires_explicit_approval (tests.test_media.MediaTests.test_conflict_requires_explicit_approval) ... ok
+test_cross_material_conflict_and_timezone_equivalence (tests.test_media.MediaTests.test_cross_material_conflict_and_timezone_equivalence) ... ok
+test_guard_rejects_bypassed_review (tests.test_media.MediaTests.test_guard_rejects_bypassed_review) ... ok
+test_missing_material_and_metadata (tests.test_media.MediaTests.test_missing_material_and_metadata) ... ok
+test_normal_and_no_publication (tests.test_media.MediaTests.test_normal_and_no_publication) ... ok
+test_repeat_save_and_failure (tests.test_media.MediaTests.test_repeat_save_and_failure) ... ok
+test_rule_risk_blocked (tests.test_media.MediaTests.test_rule_risk_blocked) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.028s
+
+OK

@@ -1,0 +1,8 @@
+{
+  "materials": {
+    "M01": {"title": "字幕功能介绍", "rights_cleared": true, "sensitive": false},
+    "M02": {"title": "未授权配乐片段", "rights_cleared": false, "sensitive": false},
+    "M03": {"title": "", "rights_cleared": true, "sensitive": false}
+  },
+  "slots": ["2026-11-02T18:00:00+08:00", "2026-11-02T19:00:00+08:00", "2026-11-02T20:00:00+08:00"]
+}
